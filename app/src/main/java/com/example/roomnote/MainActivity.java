@@ -26,6 +26,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String EXTRA_TITLE =
+            "com.codinginflow.architectureexample.EXTRA_TITLE";
+    public static final String EXTRA_PRIORITY =
+            "com.codinginflow.architectureexample.EXTRA_PRIORITY";
 
     public static final int ADD_NOTE_REQUEST = 1;
 
@@ -48,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//             Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
-//             startActivityForResult(intent, ADD_NOTE_REQUEST);
+
              getDialog();
             }
         });
@@ -90,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK) {
-            String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
+            String title = data.getStringExtra(MainActivity.EXTRA_TITLE);
 
-            int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
+            int priority = data.getIntExtra(MainActivity.EXTRA_PRIORITY, 1);
 
             Note note = new Note(title, priority);
             noteViewModel.insert(note);
